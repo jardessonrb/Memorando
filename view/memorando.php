@@ -14,14 +14,16 @@ require_once "../classes/conexao.php";
 	<title></title>
 	<?php require_once "menu.php"; ?>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
 	<script src="lib/jquery-3.2.1.min.js"></script>
 	<script src="js/funcoes.js"></script>
 </head>
 <body>
-<div class="container">
+
+<div class="container" style="position: relative; margin-left: 400px" >
 			<h1>Novo Memorando</h1>
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<form id="frmMemorando">
 						<label>Funcionário</label>
 						<input type="text" class="form-control input-sm" id="funcionario" name="funcionario">
@@ -36,26 +38,19 @@ require_once "../classes/conexao.php";
 						<label>Comentario Memorando</label>
 						<textarea class="form-control " id="comentario" name="comentario"></textarea>
 						<p></p>
-						<span class="btn btn-primary" id="btnNovoMemorando">Salvar Memorando</span>
-						<a href="../procedimentos/relatorios/criarRelatorioPdf.php"><span class="btn btn-primary" id="btnRelatorio">Relatorio</span></a>
+						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoMemorando">Salvar Memorando</span>
+						
 					</form>
-				</div>
-				<div class="col-sm-8">
-					<input type="text" name="pesq" size="30" placeholder="nome funcionario">
-					<a href="funcionarios/tabelaFuncionarios.php"><span class="btn btn-primary" id="btnRelatorio">Pesquisar</span></a>
-				</div>
-				<div class="col-sm-8">
-					<div id="tabelaFuncionariosLoad"></div>
 				</div>
 			</div>
 		</div>
+	
 </body>
 </html>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#btnNovoMemorando').click(function(){
-        $('#tabelaFuncionariosLoad').load("tab_memorando/tabelaMemorando.php");
 			vazios=validarFormVazio('frmMemorando');
 
 			if(vazios > 0){
@@ -74,10 +69,11 @@ require_once "../classes/conexao.php";
 
 					if(r==1){
 						$('#frmMemorando')[0].reset();
-						$('#tabelaFuncionariosLoad').load("tab_memorando/tabelaMemorando.php");
-						alert("Memorando Cadastrado com Sucesso!!");	
+						alert("Memorando Cadastrado com Sucesso!!");
+						window.location.href="../procedimentos/relatorios/criarRelatorioPdf.php";	
 					}else{
 						alert("Erro ao Cadastrar Memorando");
+
 					}
 				}
 			});
