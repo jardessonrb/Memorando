@@ -1,8 +1,8 @@
 <?php 
 
 session_start();
-require_once "../../classes/conexao.php";
-require_once "../../classes/funcionario.php";
+require_once "../../classes/conexao.class.php";
+require_once "../../classes/funcionario.class.php";
 
 
 

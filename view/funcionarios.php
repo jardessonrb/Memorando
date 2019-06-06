@@ -10,14 +10,16 @@ if(isset($_SESSION['usuario'])){
 	<head>
 		<title>Funcionarios</title>
 		<?php require_once "menu.php"; ?>
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
+
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" style="position: relative; margin-left: 400px">
 			<h1>Funcionarios</h1>
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<form id="frmFuncionarios">
-						<label>Nome</label>
+						<label>Nome Completo</label>
 						<input type="text" class="form-control input-sm" id="nome" name="nome">
 						<label>Sobrenome</label>
 						<input type="text" class="form-control input-sm" id="sobrenome" name="sobrenome">
@@ -25,17 +27,17 @@ if(isset($_SESSION['usuario'])){
 						<input type="text" class="form-control input-sm" id="endereco" name="endereco">
 						<label>Email</label>
 						<input type="text" class="form-control input-sm" id="email" name="email">
-						<label>Telefone</label>
+						<label for="telefone">Telefone</label>
 						<input type="text" class="form-control input-sm" id="telefone" name="telefone">
-						<label>CPF</label>
-						<input type="text" class="form-control input-sm" id="cpf" name="cpf">
+						<label id="lcpf" for="cpf">CPF</label>
+						<input type="text" class="form-control input-sm" maxlength="11" id="cpf" name="cpf">
 						<p></p>
 						<span class="btn btn-primary" id="btnAdicionarFuncionario">Salvar</span>
 					</form>
 				</div>
-				<div class="col-sm-8">
+				<!--<div class="col-sm-8">
 					<div id="tabelaFuncionariosLoad"></div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 
@@ -194,3 +196,17 @@ if(isset($_SESSION['usuario'])){
 	header("location:../index.php");
 }
 ?>
+<script type="text/javascript">
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 150) {
+      $('.logo').width(100);
+      $('.logo').height(60);
+
+    }
+    else {
+      $('.logo').height(100);
+      $('.logo').width(150);
+    }
+  }
+  );
+</script>

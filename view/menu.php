@@ -43,7 +43,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Gestão Pessoas <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="funcionarios.php">Funcionário</a></li>
-              <li><a href="../registrar.php">Usuário</a></li>
+              <li><a href="funcionario/tabelaFuncionarios.php">Lista Funcionários</a></li>
+              <li><a href="../registrar.php">Criar Usuário</a></li>
             </ul>
           </li>     
 

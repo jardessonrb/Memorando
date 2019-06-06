@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once "../../classes/conexao.php";
-require_once "../../classes/usuarios.php";
+require_once "../../classes/conexao.class.php";
+require_once "../../classes/usuarios.class.php";
 
 
 $obj = new usuarios();

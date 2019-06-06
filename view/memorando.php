@@ -1,10 +1,18 @@
 <?php 
-require_once "../classes/conexao.php";
+require_once "../classes/conexao.class.php";
     $c = new conectar();
 	$conexao=$c->conexao();
 
 	$sql = "SELECT id_funcionario FROM funcionarios ";
 	$result = mysqli_query($conexao, $sql);
+ ?>
+ <?php
+ require_once "../classes/conexao.class.php";
+    $c = new conectar();
+	$conexao=$c->conexao();
+
+	$sql = "SELECT id_funcionario, nome FROM funcionarios ORDER BY nome asc";
+	$nomes = mysqli_query($conexao, $sql);
  ?>
 
 
@@ -17,6 +25,10 @@ require_once "../classes/conexao.php";
 	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
 	<script src="lib/jquery-3.2.1.min.js"></script>
 	<script src="js/funcoes.js"></script>
+	<!--Textarea-->
+	<script type="text/javascript" src="../lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../lib/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="../lib/tinymce/init.js"></script>
 </head>
 <body>
 
@@ -26,17 +38,20 @@ require_once "../classes/conexao.php";
 				<div class="col-sm-5">
 					<form id="frmMemorando">
 						<label>Funcionário</label>
-						<input type="text" class="form-control input-sm" id="funcionario" name="funcionario">
+						<select class="form-control input-sm" name="funcionario" id="funcionario">
+							<option value="0" selected="Selecione Funcionario">Selecione Funcionario</option>
+							<?php while($mostra = mysqli_fetch_row($nomes)):?>
+								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
+							<?php endWhile; ?>	
+						</select>
 						<label>Emissor do Memorando</label>
 						<input type="text" class="form-control input-sm" id="emissor" name="emissor">
-						<label>Receptor do Memorando</label>
+						<label class="input-label">Receptor do Memorando</label>
 						<input type="text" class="form-control input-sm" id="receptor" name="receptor">
-						<label>Justificativa Memorando</label>
-				        <textarea class="form-control input-sm" id="justificativa" name="justificativa"></textarea>
 						<label>Local de Emissão</label>
 						<input type="text" class="form-control input-sm" id="local" name="local">
-						<label>Comentario Memorando</label>
-						<textarea class="form-control " id="comentario" name="comentario"></textarea>
+						<label>Justificativa do memorando</label>
+						<textarea class="form-control input-sm" id="justificativa" name="justificativa"></textarea>
 						<p></p>
 						<span class="btn btn-primary" style="position: relative; margin-left: 315px" id="btnNovoMemorando">Salvar Memorando</span>
 						
@@ -63,14 +78,14 @@ require_once "../classes/conexao.php";
 			$.ajax({
 				type:"POST",
 				data:dados,
-				url:"../procedimentos/login/novo_memorando.php",
+				url:"../procedimentos/memorando/novo_memorando.php",
 				success:function(r){
 					//alert(r);
 
 					if(r==1){
 						$('#frmMemorando')[0].reset();
 						alert("Memorando Cadastrado com Sucesso!!");
-						window.location.href="../procedimentos/relatorios/criarRelatorioPdf.php";	
+						window.location.href="../view/tab_memorando/tabelaMemorando.php";
 					}else{
 						alert("Erro ao Cadastrar Memorando");
 

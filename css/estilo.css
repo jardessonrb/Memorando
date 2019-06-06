@@ -29,3 +29,14 @@ table caption label{
 	position: relative;
 	margin: 150px left;
 }
+{
+	position: relative;
+	width:200px;
+    height:35px;
+    border-color: #FFFAFA;
+}
+#cpf {
+	position: relative;
+	width:200px;
+    height:35px;
+}

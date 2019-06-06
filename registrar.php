@@ -1,5 +1,5 @@
 <?php
-	require_once "classes/conexao.php";
+	require_once "classes/conexao.class.php";
 	$obj = new conectar();
 	$conexao = $obj->conexao();
 
@@ -8,7 +8,7 @@
 
 	$validar = 0;
 	if(mysqli_num_rows($result) > 0){
-		header("location:index.php");
+		//header("location:index.php");
 	}
 
 ?>

@@ -1,13 +1,12 @@
 
 <?php 
 
-	require_once "../../classes/conexao.php";
+	require_once "../../classes/conexao.class.php";
    
 	$c = new conectar();
 	$conexao=$c->conexao();
 
-	$sql="SELECT id_memorando, nome_funcionario, nome_receptor, justificativa, data_memorando, emissor
-	from tab_memorando order by id_memorando desc limit 8;";
+	$sql="SELECT M.id_memorando, F.nome, M.nome_receptor, M.justificativa, M.data_memorando,M.emissor FROM tab_memorando M JOIN funcionarios F on M.id_funcionario = F.id_funcionario ORDER BY id_memorando DESC LIMIT 8;";
 
 	$result = mysqli_query($conexao, $sql);
 
@@ -19,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="../../lib/alertifyjs/css/themes/default.css">
 <link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../lib/select2/css/select2.css">
-
+<script type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../../css/estilo.css">
 
 
@@ -50,7 +49,7 @@
 
           <ul class="nav navbar-nav navbar-right">
 
-            <li class="active"><a href="inicio.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
+            <li class="active"><a href="../inicio.php"><span class="glyphicon glyphicon-home"></span> Inicio</a>
             </li>
 
             
@@ -59,7 +58,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Gestão administrativo <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="tabelaMemorando.php">Memorando</a></li>
-              <li><a href="#.php">Serviços</a></li>
+              <li><a href="../TelaTeste.php">Telas de Teste</a></li>
             </ul>
           </li>
 
@@ -67,8 +66,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Gestão Pessoas <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="funcionarios.php">Funcionário</a></li>
-              <li><a href="../registrar.php">Usuário</a></li>
+              <li><a href="../funcionarios.php">Funcionário</a></li>
+              <li><a href="../funcionario/tabelaFuncionarios.php">Lista Funcionários</a></li>
+              <li><a href="#">Usuário</a></li>
             </ul>
           </li>     
 
@@ -99,11 +99,10 @@
 			<td>Código</td>
 			<td>Funcionario</td>
 	 		<td>Receptor</td>
-	 		<td>justificativa</td>
 	 		<td>Data</td>
 	 		<td>Emissor</td>
-	 		<td>Editar</td>
-		    <td>Excluir</td>
+      <td>Imprimir</td>
+		  <td>Excluir</td>
 	</tr>
 
 	<?php while($mostrar = mysqli_fetch_row($result)): ?>
@@ -112,21 +111,23 @@
 		<td><?php echo $mostrar[0]; ?></td>
 		<td><?php echo $mostrar[1]; ?></td>
 		<td><?php echo $mostrar[2]; ?></td>
-		<td><?php echo $mostrar[3]; ?></td>
 		<td><?php echo date("d/m/Y", strtotime($mostrar[4])) ?></td>
 		<td><?php echo $mostrar[5]; ?></td>
+
+    <td>
+      <a href="../../procedimentos/relatorios/ImprimirMemorandoPDF.php?idMemorando=<?php echo $mostrar[0]?>" class="btn btn-primary btn-xs"><span>
+        <span class="glyphicon glyphicon-print"></span>
+      </span></a>
+    </td>
 		
 		<td>
-			<span class="btn btn-warning btn-xs" data-toggle="modal" data-target="#abremodalFuncionariosUpdate" onclick="adicionarDado('<?php echo $mostrar[0]; ?>')">
-				<span class="glyphicon glyphicon-pencil"></span>
-			</span>
-		</td>
-		<td>
-			<span class="btn btn-danger btn-xs" onclick="eliminarFuncionario('<?php echo $mostrar[0]; ?>')">
-				<span class="glyphicon glyphicon-remove"></span>
-			</span>
+
+			 <span class="btn btn-danger btn-xs" onclick="excluirMemorando('<?php echo $mostrar[0]?>')"><span>
+        <span class="glyphicon glyphicon-remove"></span>
+      </span>
 		</td>
 	</tr>
+
 
 
 <?php endWhile; ?>
@@ -134,6 +135,29 @@
 </center>
 </form>
 </section>
+<script type="text/javascript">
+  function excluirMemorando(idMemorando){
+  var res = window.confirm("Excluir Memorando?");
+  if (res) {
+    $.ajax({
+      type:"POST",
+      data:"idMemorando=" + idMemorando,
+      url:"../../procedimentos/memorando/eliminarMemorando.php",
+      success:function(r){
+        if (r==1) {
+          window.location.href="../../view/tab_memorando/tabelaMemorando.php";
+        }else{
+          alert('Memorando Não Excluido!');
+        }
+      }
+
+    });
+  }else{
+    alert("Operação Cancelada!");
+  }
+  };
+</script>
+
 <script type="text/javascript">
   $(window).scroll(function() {
     if ($(document).scrollTop() > 150) {
