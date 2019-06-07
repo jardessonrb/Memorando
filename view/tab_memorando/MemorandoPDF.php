@@ -1,5 +1,6 @@
 
 <?php 
+
 	require_once "../../classes/conexao.class.php";
 
 
@@ -24,8 +25,10 @@ $result=mysqli_query($conexao,$sql);
  	
 
  	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
+ 	
  
- 		<style type="text/css">
+ 		<style type="text/css" charset=utf-8>
+ 			@charset "UTF-8";
  			.geral{
  				position: relative;
  			}
@@ -66,7 +69,6 @@ $result=mysqli_query($conexao,$sql);
 			    bottom:0;
 			    width:100%;
 
-
  			}
 
  			#left{
@@ -91,18 +93,19 @@ $result=mysqli_query($conexao,$sql);
  			}
  		</style>
 	 		<img src="../../img/logoneuro.png" width="200" height="120">
+
 	 		<br>
 	 		<p id="data">Teresina,&nbsp;<?php echo date("d/m/Y", strtotime($data))?>.</p>
 	        <h4>Memorando Interno</h4>
 		    <div class="geral">
 		        <hr id="linha">
 		        <div class="refe">
-		                <p>De:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $emissor?></p>
-			        	<p>Para:&nbsp;&nbsp;<?php echo $receptor?></p>
-			        	<p>Assunto:</p>
+		                <p>De:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo utf8_encode($emissor)?></p>
+			        	<p>Para:&nbsp;&nbsp;<?php echo utf8_encode($receptor)?></p>
+			        
 		        </div>
 		        <div class="conteudo">
-		        <p class="conteudo" align="center"><?php echo $justificativa ?></p>
+		        <p class="conteudo" align="center"><?php echo utf8_encode($justificativa)?></p>
 		        </div>
 		        <div class="rodape">
 		        	<div id="left">
@@ -118,4 +121,5 @@ $result=mysqli_query($conexao,$sql);
 		        		Assinatura Diretor
 		        	</div>
 		    </div>
- 	    </div>	
+ 	    </div>
+	

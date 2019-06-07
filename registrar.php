@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    if(isset($_SESSION['usuario'])){
 	require_once "classes/conexao.class.php";
 	$obj = new conectar();
 	$conexao = $obj->conexao();
@@ -56,7 +58,11 @@
 </html>
 
 
-
+<?php 
+} else{
+  header("location:./index.php");
+}
+?>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -75,11 +81,12 @@
 				type:"POST",
 				data:dados,
 				url:"procedimentos/login/registrarUsuario.php",
-				success:function(r){
-					//alert(r);
+				success:function(r){	
 
 					if(r==1){
 						alert("Inserido com Sucesso!!");
+						$('#frmRegistro')[0].reset();
+						window.location.href="index.php";
 					}else{
 						alert("Erro ao Inserir");
 					}

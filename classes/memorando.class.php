@@ -21,8 +21,6 @@ class cmemorando{
 		return mysqli_query($conexao, $sql);
 	}
 
-
-
 }
 
 ?>

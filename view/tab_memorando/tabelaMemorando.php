@@ -1,5 +1,8 @@
 
 <?php 
+  
+  session_start();
+  if(isset($_SESSION['usuario'])){
 
 	require_once "../../classes/conexao.class.php";
    
@@ -68,7 +71,7 @@
             <ul class="dropdown-menu">
               <li><a href="../funcionarios.php">Funcionário</a></li>
               <li><a href="../funcionario/tabelaFuncionarios.php">Lista Funcionários</a></li>
-              <li><a href="#">Usuário</a></li>
+              <li><a href="../../registrar.php">Criar Usuário</a></li>
             </ul>
           </li>     
 
@@ -77,9 +80,9 @@
           glyphicon glyphicon-user
           
           <li class="dropdown" >
-            <a href="#" style="color: red"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario:   <span class="caret"></span></a>
+            <a href="#" style="color: red"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario: <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li> <a style="color: red" href="../procedimentos/sair.php"><span class="glyphicon glyphicon-off"></span> Sair</a></li>
+              <li> <a style="color: red" href="../../procedimentos/sair.php"><span class="glyphicon glyphicon-off"></span> Sair</a></li>
               
             </ul>
           </li>
@@ -135,6 +138,11 @@
 </center>
 </form>
 </section>
+<?php 
+} else{
+  header("location:../../index.php");
+}
+?>
 <script type="text/javascript">
   function excluirMemorando(idMemorando){
   var res = window.confirm("Excluir Memorando?");
