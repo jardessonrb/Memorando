@@ -58,7 +58,7 @@ require_once "../../classes/conexao.class.php";
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Gestão administrativo <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="../tab_memorando/tabelaMemorando.php">Memorando</a></li>
-              <li><a href="#.php">Serviços</a></li>
+             <li><a href="../local.php">Cadastrar Local</a></li>
             </ul>
           </li>
 
@@ -130,6 +130,49 @@ require_once "../../classes/conexao.class.php";
 
 <?php endWhile; ?>
 </table>
+<script type="text/javascript">
+  function eliminarFuncionario(idFuncionario){
+    $.ajax({
+          type:"POST",
+          data:"idFuncionario=" + idFuncionario,
+          url:"../../procedimentos/funcionario/eliminarFuncionarios.php",
+          success:function(r){
+            alert(r);
+
+            if(r==1){
+              $('#tabelaFuncionarioLoad').load("funcionario/tabelafuncionarios.php");
+              alertify.success("Excluido com sucesso!!");
+            }else{
+              alertify.error("Não foi possível excluir");
+            }
+          }
+        });
+
+  }
+
+</script>
+<script type="text/javascript">
+  function editarFuncionario(idFuncionario){
+    window.location.href="../view/tab_memorando/tabelaMemorando.php";
+    $.ajax({
+          type:"POST",
+          data:"idFuncionario=" + idFuncionario,
+          url:"../memorando.php",
+          success:function(r){
+            alert(r);
+
+            if(r==1){
+              $('#tabelaFuncionarioLoad').load("../../view/funcionario/tabelaFuncionarios.php");
+              alertify.success("Excluido com sucesso!!");
+            }else{
+              alertify.error("Não foi possível excluir");
+            }
+          }
+        });
+
+  }
+
+</script>
 <script type="text/javascript">
   $(window).scroll(function() {
     if ($(document).scrollTop() > 150) {

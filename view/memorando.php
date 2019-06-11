@@ -36,7 +36,11 @@ require_once "../classes/conexao.class.php";
 	<!--Textarea-->
 	<script type="text/javascript" src="../lib/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="../lib/tinymce/tinymce.min.js"></script>
-	<script type="text/javascript" src="../lib/tinymce/init.js"></script>
+	<script>
+		tinymce.init({ 
+	 	  selector:'#justificativa'
+	 	});
+	</script>
 </head>
 <body>
 
@@ -46,7 +50,7 @@ require_once "../classes/conexao.class.php";
 				<div class="col-sm-6">
 					<form id="frmMemorando">
 						<label>Funcionário</label>
-						<select class="form-control input-sm" name="funcionario" id="funcionario">
+						<select class="form-control input-sm" name="funcionario" id="funcionario" required>
 							<option value="0" selected="Selecione Funcionario">Selecione Funcionario</option>
 							<?php while($mostra = mysqli_fetch_row($nomes)):?>
 								<option value="<?php echo $mostra[0] ?>"><?php echo $mostra[1]; ?></option>
@@ -65,9 +69,6 @@ require_once "../classes/conexao.class.php";
 						</select>
 						<label>Justificativa do memorando</label>
 						<textarea name="justificativa" id="justificativa" rows="5" class="form-control" style="height:280px;"></textarea>
-			            <script> 
-			            tinymce.init({ selector:'textarea'  });
-			            </script> 
 						<p></p>
 						<span class="btn btn-primary" style="position: relative; margin-left: 412px" id="btnNovoMemorando">Salvar Memorando</span>
 						
@@ -81,7 +82,7 @@ require_once "../classes/conexao.class.php";
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#btnNovoMemorando').click(function(){		
+		$('#btnNovoMemorando').click(function(){	
 			vazios=validarFormVazio('frmMemorando');
 			if(vazios > 0){
 				alert("Preencha os Campos!!");
