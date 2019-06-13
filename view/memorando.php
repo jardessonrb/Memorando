@@ -47,7 +47,7 @@ require_once "../classes/conexao.class.php";
 <div class="container" style="position: relative; margin-left: 400px" >
 			<h1>Novo Memorando</h1>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-7">
 					<form id="frmMemorando">
 						<label>Funcionário</label>
 						<select class="form-control input-sm" name="funcionario" id="funcionario" required>

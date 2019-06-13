@@ -1,4 +1,4 @@
-
+<!--Inicio do bloco PHP-->
 <?php 
 
 	require_once "../../classes/conexao.class.php";
@@ -18,81 +18,156 @@ $result=mysqli_query($conexao,$sql);
 	$justificativa=$ver[3];
 	$data=$ver[4];
 	$emissor=$ver[5];
+	$tag = "Funcionário";
 	
 
  ?>	
-
+<!--Fim do bloco PHP-->
  	
 
  	<link rel="stylesheet" type="text/css" href="../../lib/bootstrap/css/bootstrap.css">
- 	
- 
+ 	<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script> 
  		<style type="text/css" charset=utf-8>
- 			@charset "UTF-8";
- 			.geral{
+ 			#pagina{
+ 				height: 930px;
+ 				width: 620px;
+ 				border: 1px solid;
+ 				border-color: #cc0000;
+ 			}
+ 			/*Definição de tamnho para formatação*/
+ 			#cabecalho{
+ 				position: relative;			
+ 				max-height: 230px;
+
+ 			}
+ 			#corpo{
  				position: relative;
+ 				height: 500px;
+ 				max-height: 500px;
+ 			}
+ 			#rodape{
+ 				position: relative;
+ 				height: 162px;
+ 				max-height: 162px;
+ 			}
+ 			/*Fim da formatação*/
+ 			/*Formatação do conteudo cabeçalho*/
+ 			#conteudo_cabecalho{
+ 			   position: relative;
  			}
  			#data{
- 				position: relative;
- 				margin-top: -10px;
  				text-align: right;
+ 				margin-right: 10px;
+ 				margin-top: -20px;
  				font-size: 12px;
  			}
- 			h4{
- 				color: #696969;
- 				text-align: center;
+ 			#imagem{
+
+ 				margin-top: 30px;
+ 				margin-left: 20px;
  			}
- 			.titulo{
- 				text-align: center;
- 				color: #696969;
- 				
- 			}
- 			.conteudo{
- 				font-size: 16px;
- 				position: relative;
- 				font-family: arial;
- 				text-align: justify;
- 				top: 50px
- 			}
- 			p .refe{
- 				position: justify;
- 				padding-left: 1.8em 
- 			}
- 			
  			hr{
- 				width: 100%;
-				margin: 0 auto 0 0;
- 			}
- 			.rodape{
- 				position:fixed;
- 				height: 100px;
-			    bottom:0;
-			    width:100%;
-
- 			}
-
- 			#left{
  				position: relative;
- 				text-align: left;
- 				top: 82px;
- 				
- 				
+ 				border-color: gray; 
+ 				top: -20px;
+ 				width: 500px;
+ 				size: 0.2px;
+ 			}
+ 			h4{
+ 				position: relative;
+ 				top: 20px;
+
+ 			}
+ 			/*Fim da formatação do cabeçalho*/
+ 			/*Formatação do conteudo corpo*/
+ 			#conteudo_corpo{
+ 				position: relative;
+
+ 			}
+ 			#conteudo_justifi{
+ 				text-align: justify;
+ 				font-size: 16px;
+ 				margin-top: 20px;
+ 			}
+ 			p{
+ 				margin-left: 20px;
+ 			}
+ 			/*Fim da formatação do corpo*/
+ 			/*Formatação do conteudo rodape*/
+ 			#conteudo_rodape{
+ 			     position: relative;
+ 			     top: 85px;
+ 			}
+ 			#esquerdo{
+ 				float: left;
+ 				margin-left: 10px;
  			}
  			#centro{
  				position: relative;
  				text-align: center;
- 				top: 42px;
- 				
- 				
+ 				margin-right: 160px;
  			}
- 			#right{
+ 			#direita{
  				position: relative;
- 				text-align: left;
- 				top: 0;
- 				
+ 				text-align: right;
+ 				margin-right: 10px;
+ 				top: -40px;
+
  			}
+ 			
+ 			/*Fim da formatação do rodape*/
  		</style>
-	 		<img src="../../img/logoneuro.png" width="200" height="120">
+ 		<div id="pagina" class="container-fluid">
+ 			<div class="row">
+ 				<div id="cabecalho">
+ 					<div id="conteudo_cabecalho">
+ 						<img id="imagem" src="../../img/LogoNeuroCentro.png" width="200" height="120">
+ 						<p id="data">Teresina,&nbsp;<?php echo date("d/m/Y", strtotime($data))?>.</p>
+ 						<h4 id="linha" align="center">Memorando Interno</h4><br><br>
+ 						<hr>
+ 						
+ 					</div>
+ 					
+ 				</div>
+ 			</div>
+ 			<div class="row"> 
+ 				<div id="corpo">
+ 					<div id="conteudo_corpo">
+ 						<p>De:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo utf8_encode($emissor)?></p>
+			        	<p>Para:&nbsp;&nbsp;<?php echo utf8_encode($receptor)?></p>
+			        	<p>Funcionario:&nbsp;&nbsp;<?php echo utf8_encode($funcionario)?></p>
+			        	<div id="conteudo_justifi">
+			        		<?php echo utf8_encode($justificativa)?>
+			        	</div>
+ 					</div>
+ 					
+ 				</div>
+ 			</div>
+ 			<div class="row">
+ 				<div id="rodape">
+ 					<div id="conteudo_rodape">
+ 						<div id="esquerdo">
+			        		_____________________<br>
+			        		Assinatura Coordenador
+		        		</div>
+		        	<div id="centro">
+			        		_____________________<br>
+			        		Assinatura Administrativa
+		        	</div>
+		        	<div id="direita">
+			        		_____________________<br>
+			        		Assinatura Diretor
+		        	</div>
+ 						
+ 					</div>
+ 					
+ 				</div>
+ 			</div>
+
+	 		
+ 	    </div>
+<!-- Página base-->
+<!--<img src="../../img/logoneuro.png" width="200" height="120">
 
 	 		<br>
 	 		<p id="data">Teresina,&nbsp;<?php echo date("d/m/Y", strtotime($data))?>.</p>
@@ -121,5 +196,4 @@ $result=mysqli_query($conexao,$sql);
 		        		Assinatura Diretor
 		        	</div>
 		    </div>
- 	    </div>
-	
+ 	    </div>-->

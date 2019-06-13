@@ -11,6 +11,8 @@ if(isset($_SESSION['usuario'])){
 		<title>Funcionarios</title>
 		<?php require_once "menu.php"; ?>
 		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
+		<script src="../lib/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.mask.min.js"></script>
 
 	</head>
 	<body>
@@ -79,6 +81,10 @@ if(isset($_SESSION['usuario'])){
 
 	</body>
 	</html>
+	<script type="text/javascript">
+			$("#cpf").mask("000.000.000-00")
+			$("#telefone").mask("(00) 00000-0000")
+	</script>
 
 	<script type="text/javascript">
 		function adicionarDado(idfuncionario){
